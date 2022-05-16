@@ -1,17 +1,17 @@
 export class giphyApiTrendingClass {
-   returnImg(input) {
+  static returnImg(input) {
     return `<image class="img" src="${input}"></image>`;
   }
 
-   renderImg(input) {
-    document.getElementById("img-grid-id").innerHTML += input;
+  static renderImg(input) {
+    document.getElementById("img-flex-id").innerHTML += input;
   }
 
-   resetHTML() {
-    document.getElementById("img-grid-id").innerHTML = null;
+  static resetHTML() {
+    document.getElementById("img-flex-id").innerHTML = null;
   }
 
-   initialiseSuggestions(topicArr) {
+  static initialiseSuggestions(topicArr) {
     let temp = [];
     for (let i = 0; i < topicArr.length; i++) {
       temp += `<button class="suggesion-button">${topicArr[i]}</button>`;
@@ -26,25 +26,51 @@ export class giphyApiTrendingClass {
         if (document.getElementById("search-bar-id").value != "") {
           arr.shift();
           arr.push(document.getElementById("search-bar-id").value);
-          initialiseSuggestions(arr);
+          giphyApiTrendingClass.initialiseSuggestions(arr);
         }
       });
   }
 
-  static addEventListenerTrending(input,arr) {
+  static addEventListenerTrending(input, arr) {
     document
       .getElementById("tending-button-id")
       .addEventListener("click", (event) => {
-        resetHTML();
+        giphyApiTrendingClass.resetHTML();
         for (let i = 0; i < 10; i++) {
           arr[i] = input.data[i].images;
-          console.log(arr[i].downsized.url);
-
-          renderImg(returnImg(arr[i].downsized.url));
+          giphyApiTrendingClass.renderImg(
+            giphyApiTrendingClass.returnImg(arr[i].downsized.url)
+          );
         }
       });
   }
 }
 
-class giphyApiSearchClass {}
+export class giphyApiSearchClass {
 
+  static returnImg(input) {
+    return `<image class="img" src="${input}"></image>`;
+  }
+
+  static renderImg(input) {
+    document.getElementById("img-flex-id").innerHTML += input;
+  }
+
+  static resetHTML() {
+    document.getElementById("img-flex-id").innerHTML = null;
+  }
+
+  static addEventListenerSearch(input, arr) {
+    document
+      .getElementById("tending-button-id")
+      .addEventListener("click", (event) => {
+        giphyApiSearchClass.resetHTML();
+        for (let i = 0; i < 10; i++) {
+          arr[i] = input.data[i].images;
+          giphyApiSearchClass.renderImg(
+            giphyApiSearchClass.returnImg(arr[i].downsized.url)
+          );
+        }
+      });
+  }
+}

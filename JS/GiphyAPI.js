@@ -7,26 +7,17 @@ var params = {
   fmt: "json",
 };
 
-let trendingDataArr = [];
-
-let trendingImgArr = [];
-
-let topics = ["Internet Cats", "Meme's", "Typing", "Space", "Rick and Morty"];
-
-let imageGrid = document.getElementById("img-grid-id");
-
-let giphySearchURL = "";
+let hello = 'hello'
 
 let giphyTrendingURL = fetch(
   `${queryURL}api_key=${params.api_key}&limit=${params.limit}`
 );
 
+let giphySearchURL = fetch(
+    `${searchURL}q=${hello}&api_key=${params.api_key}`
+)
+
 export {
-  params,
-  trendingDataArr,
-  trendingImgArr,
-  topics,
-  imageGrid,
-  giphySearchURL,
   giphyTrendingURL,
+  giphySearchURL,
 };
