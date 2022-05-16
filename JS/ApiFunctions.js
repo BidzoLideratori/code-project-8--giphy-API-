@@ -33,7 +33,7 @@ export class giphyApiTrendingClass {
 
   static addEventListenerTrending(input, arr) {
     document
-      .getElementById("tending-button-id")
+      .getElementById("trending-button-id")
       .addEventListener("click", (event) => {
         giphyApiTrendingClass.resetHTML();
         for (let i = 0; i < 10; i++) {
@@ -47,7 +47,6 @@ export class giphyApiTrendingClass {
 }
 
 export class giphyApiSearchClass {
-
   static returnImg(input) {
     return `<image class="img" src="${input}"></image>`;
   }
@@ -60,17 +59,26 @@ export class giphyApiSearchClass {
     document.getElementById("img-flex-id").innerHTML = null;
   }
 
-  static addEventListenerSearch(input, arr) {
-    document
-      .getElementById("tending-button-id")
-      .addEventListener("click", (event) => {
-        giphyApiSearchClass.resetHTML();
-        for (let i = 0; i < 10; i++) {
-          arr[i] = input.data[i].images;
-          giphyApiSearchClass.renderImg(
-            giphyApiSearchClass.returnImg(arr[i].downsized.url)
-          );
-        }
-      });
+  static getUserInput() {
+    let searchContent = document.getElementById("search-bar-id");
+    let temp = searchContent.value;
+    return temp.replace(" ", "+");
   }
+
+  static assignSearchValue() {
+    return new Promise();
+  }
+
+  static addEventListenerSearch(input, arr, userInput) {
+
+        if (userInput != "") {
+          giphyApiSearchClass.resetHTML();
+          for (let i = 0; i < 10; i++) {
+            arr[i] = input.data[i].images;
+            giphyApiSearchClass.renderImg(
+              giphyApiSearchClass.returnImg(arr[i].downsized.url)
+            );
+          }
+        }
+    }
 }

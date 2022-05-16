@@ -1,4 +1,4 @@
-import { giphyApiTrendingClass,giphyApiSearchClass } from "./ApiFunctions.js";
+import { giphyApiTrendingClass, giphyApiSearchClass } from "./ApiFunctions.js";
 import * as API from "./GiphyAPI.js";
 
 let trendingImgArr = [];
@@ -12,18 +12,24 @@ API.giphyTrendingURL
     return res.json();
   })
   .then((res) => {
-    trendingImgArr = res.data;
     giphyApiTrendingClass.addEventListenerTrending(res, trendingImgArr);
   });
 
-  let mypromise = new Promise;
-
-  mypromise.then
-API.giphySearchURL
-  .then((res) => {
-    return res.json();
-  })
-  .then((res) => {
-    trendingImgArr = res.data;
-    giphyApiSearchClass.addEventListenerTrending(res, trendingImgArr);
-  });
+let p = new Promise((resolve, reject) => {
+  API.submitButton.addEventListener("click", (event) => {resolve});
+}).then((res) => {
+  let userInput = "";
+  res = fetch(
+    `${API.searchURL}q=${userInput}&api_key=${API.params.api_key}`
+  )
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      giphyApiSearchClass.addEventListenerSearch(
+        res,
+        trendingImgArr,
+        userInput
+      );
+    });
+});

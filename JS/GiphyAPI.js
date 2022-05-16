@@ -7,17 +7,11 @@ var params = {
   fmt: "json",
 };
 
-let hello = 'hello'
+let submitButton = document.getElementById("search-button-id");
+let searchBar = document.getElementById("search-button-id");
 
 let giphyTrendingURL = fetch(
   `${queryURL}api_key=${params.api_key}&limit=${params.limit}`
 );
 
-let giphySearchURL = fetch(
-    `${searchURL}q=${hello}&api_key=${params.api_key}`
-)
-
-export {
-  giphyTrendingURL,
-  giphySearchURL,
-};
+export { giphyTrendingURL, params, searchURL, searchBar, submitButton };
